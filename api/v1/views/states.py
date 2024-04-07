@@ -7,6 +7,7 @@ from models.state import State
 from models import storage
 from api.v1.views import app_views
 
+
 @app_views.route('/states', strict_slashes=False)
 def get_all_states():
     """
@@ -29,7 +30,7 @@ def get_state(state_id):
         abort(404)
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)  # noqa
 def delete_state(state_id):
     """
     """
@@ -56,10 +57,11 @@ def create_state(state_id):
 
     if 'name' not in kwargs:
         abort(400, "Missing name")
-    
+
     state = State(**kwargs)
     state.save()
     return jsonify(state.to_dict()), 200
+
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
@@ -81,30 +83,3 @@ def update_state(state_id):
         return jsonify(state.to_dict()), 200
     else:
         return abort(404)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
